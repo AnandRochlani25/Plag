@@ -1,0 +1,66 @@
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+      <center>
+<div class="container" style="width:1280px;font-size: 25px;">
+<h1>Report Form</h1>
+<hr>
+
+<form action="" method="post" >
+	{% csrf_token %} 
+   
+    <div class="form-group">
+        <label for="id_cohort_id">Cohort id:</label>  <br>
+    
+       
+      <input type="text" name="cohort_id" maxlength="15" required id="id_cohort_id">
+      </div>
+      <div class="form-group">
+           <label for="id_unit">Unit:</label> <br>
+       
+       
+      <input type="number" name="unit" required id="id_unit">
+      
+      </div>
+    
+
+      <div class="form-group">
+          <label for="id_sprint">Sprint:</label>     <br>
+       
+       
+      <input type="number" name="sprint" required id="id_sprint">  
+      
+      </div>
+      
+    
+
+      <div class="form-group">
+          <label for="id_filename">Filename:</label>      <br>
+       
+       
+      <input type="text" name="filename" maxlength="255" required id="id_filename">
+      </div>
+
+      <div class="form-group">
+          <label for="id_extension">Extension:</label>      <br>
+       
+     
+      <input type="text" name="extension" maxlength="10" required id="id_extension">
+      
+      </div>
+      
+      
+    
+    
+	  <button type="submit" class="btn btn-default" style="width:200px;font-size: 35px; ">Submit</button>
+	
+</form>
+</div>
+
+</center>
