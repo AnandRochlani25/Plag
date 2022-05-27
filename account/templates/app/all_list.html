@@ -1,0 +1,48 @@
+
+<br>
+<h2>Plagiarism report</h2>
+<h4>Submission path: {{sub_url}}</h4>
+
+<table border="1" style="width:400px;font-size: 12px;" class="table table-condensed">
+    <tr>
+        
+        <th style="font-size: 12px;">STUDENT-1</th>
+        <th>STUDENT-2</th>
+        <th>similarity_code</th>
+        <th>similarity_ids</th>
+        <th>similarity_classes</th>        
+        <th>similarity_content</th>
+        <th>similarity_type</th>        
+        <th>similarity_value</th>        
+        <th>similatity_hrefs</th>    
+        <th>similarity_srcs</th>        
+        <th>similarity_others</th>
+    </tr>
+   
+    
+    {% for i in records  %}
+    <td> </td>
+    <tr> <b>
+        
+        <td style="font-size: 12px;">{{ i.student_1 }}</td>
+        
+        <td>{{ i.student_2 }}</td></b>
+        <td>{{ i.similarity_code }}</td>
+        <td>{{ i.similarity_ids }}</td>
+        <td>{{ i.similarity_classes }}</td>
+        <td>{{ i.similarity_content }}</td>
+        <td>{{ i.similarity_type }}</td>
+        <td>{{ i.similarity_value }}</td>
+        <td>{{ i.similatity_hrefs }}</td>
+        <td>{{ i.similarity_srcs }}</td>
+        <td>{{ i.similarity_others }}</td>
+        
+    </tr>
+    
+    {% endfor %}      
+
+  </table><br>
+
+
+  <br>
+<br>

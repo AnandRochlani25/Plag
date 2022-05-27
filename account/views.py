@@ -5,8 +5,8 @@ from .keywords import html_close_map, html_open_map
 from pprint import pprint
 from typing_extensions import final
 
-def home_page(request):
-    return render(request,'app/home.html')
+def home_page_unit(request):
+    return render(request,'app/home1.html')
 # Creds
 TOKEN = "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"
 g = Github(TOKEN)
@@ -179,10 +179,12 @@ def get_report(request):
     
     s='select id,student_1,student_2,similarity_code,similarity_ids,similarity_classes,similarity_content,similarity_type,similarity_value,similatity_hrefs,similarity_others from account_recordhtml where report_id='+str(id[0].id)
     records=RecordHtml.objects.raw(s)
-    for record in records:
-        print(record)
-    return HttpResponse("Record Fetch Successfully")
-    #return render(request,'app/show_record.html',{'records':records})
+    #return HttpResponse(records)
+    unit_slug = 'unit-' + str(unit) + '/'
+    sprint_slug = 'sprint-' + str(sprint) + '/'
+    sub_url = unit_slug + sprint_slug + 'evaluation/' + filename + '.' + extension
+    
+    return render(request,'app/all_list.html',{'records':records,'sub_url':sub_url})
 
 
 
