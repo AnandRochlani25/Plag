@@ -150,8 +150,8 @@ def get_code(file_name, extension, student1_repo):
 #
 STUDENTS_GITHUB = ["mahesh_fw14_576", "shoaib_fw14_157","tejaswini_fw14_688","megha_fw14_307","nikhil_fw14_698", "alok_fw14_018"]
 #,“masai-course/tarasish_fw14_482”]FILENAME = "getPayment"
-from .models import RecordHtml
-from blog.models import Report
+from .models import PlagiarismRecordU_2
+from blog.models import PlagiarismReport
 from blog.forms import ReportForm
 from blog.views import get_particular_code
 
@@ -169,16 +169,16 @@ def get_report(request):
     sprint=form['sprint'].value()
     filename=form['filename'].value()
     extension=form['extension'].value()
-    s='SELECT id from blog_report where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
-    id= Report.objects.raw(s)
-   # print(id[0].id)
+    s='SELECT id from blog_plagiarismreport where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
+    id= PlagiarismReport.objects.raw(s)
+    # print(id[0].id)
     try:
         x=id[0]
     except:
         return HttpResponse("no record found")
     
-    s='select id,student_1,student_2,similarity_code,similarity_ids,similarity_classes,similarity_content,similarity_type,similarity_value,similatity_hrefs,similarity_others from account_recordhtml where report_id='+str(id[0].id)
-    records=RecordHtml.objects.raw(s)
+    s='select id,student_1,student_2,similarity_code,similarity_ids,similarity_classes,similarity_content,similarity_type,similarity_value,similatity_hrefs,similarity_others from account_PlagiarismRecordU_2 where report_id='+str(id[0].id)
+    records=PlagiarismRecordU_2.objects.raw(s)
     #return HttpResponse(records)
     unit_slug = 'unit-' + str(unit) + '/'
     sprint_slug = 'sprint-' + str(sprint) + '/'
@@ -202,9 +202,9 @@ def generate_report(request):
     sprint=form['sprint'].value()
     filename=form['filename'].value()
     extension=form['extension'].value()
-    s='SELECT id from blog_report where cohort_id="'+form['cohort_id'].value()+'" and unit='+str(form['unit'].value())+' and sprint='+str(form['sprint'].value())+' and filename="'+form['filename'].value()+'"and extension="'+form['extension'].value()+'"'
+    s='SELECT id from blog_plagiarismreport where cohort_id="'+form['cohort_id'].value()+'" and unit='+str(form['unit'].value())+' and sprint='+str(form['sprint'].value())+' and filename="'+form['filename'].value()+'"and extension="'+form['extension'].value()+'"'
     
-    id= Report.objects.raw(s)
+    id= PlagiarismReport.objects.raw(s)
     
      #   s="YOur request is being processed try after 2 hours"
     try:
@@ -213,11 +213,11 @@ def generate_report(request):
     except:
         
         print('emty')
-        report=Report(cohort_id=cohort,unit=unit,sprint=sprint,filename=filename,extension=extension)
+        report=PlagiarismReport(cohort_id=cohort,unit=unit,sprint=sprint,filename=filename,extension=extension)
         report.save()
-        s='SELECT id from blog_report where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
+        s='SELECT id from blog_PlagiarismRecordU_3report where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
          
-        id= Report.objects.raw(s)[0]
+        id= PlagiarismReport.objects.raw(s)[0]
     for i in range(len(STUDENTS_GITHUB)):
         student_1 = STUDENTS_GITHUB[i]
         parser_1 = MyHTMLParser()
@@ -261,7 +261,7 @@ def generate_report(request):
                     similatity_hrefs = round(list_similarity(hrefs_1, hrefs_2))
                     similarity_srcs = round(list_similarity(srcs_1, srcs_2))
                     similarity_others = round(list_similarity(others_1, others_2))
-                    record=RecordHtml(report_id=id.id,student_1=student_1,student_2=student_2,
+                    record=PlagiarismRecordU_2(report_id=id.id,student_1=student_1,student_2=student_2,
                     similarity_code=similarity_code,similarity_ids=similarity_ids,
                     similarity_classes=similarity_classes,similarity_content=similarity_content,
                     similarity_type=similarity_type,similarity_value =similarity_value,

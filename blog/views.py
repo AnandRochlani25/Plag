@@ -355,7 +355,7 @@ extension = "js"
 
 
 
-from .models import Record,Report
+from .models import PlagiarismRecordU_3,PlagiarismReport
 
 def get_report(request):
     form = ReportForm()
@@ -371,16 +371,16 @@ def get_report(request):
     sprint=form['sprint'].value()
     filename=form['filename'].value()
     extension=form['extension'].value()
-    s='SELECT id from blog_report where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
-    id= Report.objects.raw(s)
+    s='SELECT id from blog_Plagiarismreport where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
+    id= PlagiarismReport.objects.raw(s)
    # print(id[0].id)
     try:
         x=id[0]
     except:
         return HttpResponse("no record found")
     
-    s='select id,student_1, student_2,similarity_coeff from blog_record where report_id='+str(id[0].id)
-    records=Record.objects.raw(s)
+    s='select id,student_1, student_2,similarity_coeff from blog_PlagiarismRecordU_3 where report_id='+str(id[0].id)
+    records=PlagiarismRecordU_3.objects.raw(s)
     for record in records:
         print(record)
     return render(request,'app/show_record.html',{'records':records})
@@ -418,9 +418,9 @@ def generate_result(request):
     sprint=form['sprint'].value()
     filename=form['filename'].value()
     extension=form['extension'].value()
-    s='SELECT id from blog_report where cohort_id="'+form['cohort_id'].value()+'" and unit='+str(form['unit'].value())+' and sprint='+str(form['sprint'].value())+' and filename="'+form['filename'].value()+'"and extension="'+form['extension'].value()+'"'
+    s='SELECT id from blog_Plagiarismreport where cohort_id="'+form['cohort_id'].value()+'" and unit='+str(form['unit'].value())+' and sprint='+str(form['sprint'].value())+' and filename="'+form['filename'].value()+'"and extension="'+form['extension'].value()+'"'
     
-    id= Report.objects.raw(s)
+    id= PlagiarismReport.objects.raw(s)
     
      #   s="YOur request is being processed try after 2 hours"
     try:
@@ -429,11 +429,11 @@ def generate_result(request):
     except:
         
         print('empty')
-        report=Report(cohort_id=cohort,unit=unit,sprint=sprint,filename=filename,extension=extension)
+        report=PlagiarismReport(cohort_id=cohort,unit=unit,sprint=sprint,filename=filename,extension=extension)
         report.save()
-        s='SELECT id from blog_report where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
+        s='SELECT id from blog_Plagiarismreport where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
          
-        id= Report.objects.raw(s)[0]
+        id= PlagiarismReport.objects.raw(s)[0]
     #report.object.create(cohort,unit,sprint,filename,extension)
         
         cohort_repos = get_repo_list(cohort)
@@ -469,7 +469,7 @@ def generate_result(request):
                     js_code_2 = get_js(code_2)
                     tokenised_code_2 = tokenise(code_2)
                     similarity_coeff = calculate_similarity_coeff(tokenised_code_1, tokenised_code_2)
-                    record=Record(report_id=id.id,student_1=student_1,student_2=student_2,similarity_coeff=similarity_coeff)
+                    record=PlagiarismRecordU_3(report_id=id.id,student_1=student_1,student_2=student_2,similarity_coeff=similarity_coeff)
                     record.save()
                     print("s")
                     writer.writerow({'student_1': student_1, 'student_2': student_2, 'similarity_percentage': similarity_coeff})

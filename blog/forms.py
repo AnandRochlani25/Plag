@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from .models import Report
+from .models import PlagiarismReport
 
 class ReportForm(ModelForm):
 	class Meta:
-		model = Report
+		model = PlagiarismReport
 		fields = '__all__'

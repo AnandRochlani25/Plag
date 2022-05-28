@@ -2,7 +2,7 @@
 from django.db import models
 
 # Create your models here.
-class Report(models.Model):
+class PlagiarismReport(models.Model):
     #cohort, unit, sprint, file_name, extension)
     cohort_id=models.CharField(max_length=15)
     unit=models.IntegerField()
@@ -14,8 +14,8 @@ class Report(models.Model):
         return self.cohort_id+' '+str(self.unit)+'  '+str(self.sprint)+' '+' '+self.filename+' '+self.extension
 
 
-class Record(models.Model):
-    report=models.ForeignKey(Report,on_delete=models.CASCADE)
+class PlagiarismRecordU_3(models.Model):
+    report=models.ForeignKey(PlagiarismReport,on_delete=models.CASCADE)
     student_1=models.CharField(max_length=15)
     student_2=models.CharField(max_length=15)
     similarity_coeff=models.FloatField()

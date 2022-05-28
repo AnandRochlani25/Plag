@@ -1,9 +1,9 @@
 from django.db import models
-from blog.models import Report
+from blog.models import PlagiarismReport
 # Create your models here.
 
-class RecordHtml(models.Model):
-    report=models.ForeignKey(Report,on_delete=models.CASCADE)
+class PlagiarismRecordU_2(models.Model):
+    report=models.ForeignKey(PlagiarismReport,on_delete=models.CASCADE)
     student_1=models.CharField(max_length=15)
     student_2=models.CharField(max_length=15)
     similarity_code=models.FloatField()
