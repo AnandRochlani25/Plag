@@ -390,10 +390,6 @@ from .forms import ReportForm
 
 
 
-
-    
-    
-@staticmethod
 def generate_result(request):
     
     """
