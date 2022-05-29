@@ -1,2 +1,69 @@
-<li><a href="../unit2"> Unit-2</a></li>
-<li><a href="../unit3"> Unit-3</a></li>
+<!DOCTYPE HTML>
+<!-- first load django static tag. -->
+
+{% load static %}
+
+<html>
+	<head>
+		<title>masai</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'css/noscript.css' %}"  /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<a href="{% url 'home' %}" class="logo"><strong>masai</strong> <span>school</span></a>
+						
+
+                        <nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<ul class="links">
+							<li><a href="{% url 'home' %}">Home</a></li>
+							<li><a href="../unit2"> Unit-2</a></li>
+                            <li><a href="../unit3"> Unit-3</a></li>
+						</ul>
+						
+					</nav>
+
+				<!-- Banner -->
+					<section id="banner" class="major">
+						<div class="inner">
+							<header class="major">
+								<h1>Coding Plagiarism Detection</h1>
+							</header>
+							<div >
+								<p>Project to enable plagiarism detection in students' submissions<br />
+								Developed using django framework.</p>
+								<ul class="actions">
+									<li><a href="#menu" class="button next scrolly">Get Started</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+			</div>
+
+		<!-- Scripts -->
+			<!-- <script src="assets/js/jquery.min.js"></script> -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/browser.min.js' %}"></script>
+			<script src="{% static 'js/breakpoints.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+
+	</body>
+</html>
+
+
+<!-- use django static tag ton load js file and css file. -->
