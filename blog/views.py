@@ -393,8 +393,7 @@ from .forms import ReportForm
 
     
     
-@staticmethod
-def generate_result(request):
+def generate_result1(request):
     
     """
     //c11,3,2,abc.html
