@@ -9,9 +9,9 @@ class PlagiarismReport(models.Model):
     sprint=models.IntegerField()
     filename=models.CharField(max_length=255)
     extension=models.CharField(max_length=10)
-
+    token=models.CharField(max_length=100000)
     def __str__(self):
-        return self.cohort_id+' '+str(self.unit)+'  '+str(self.sprint)+' '+' '+self.filename+' '+self.extension
+        return self.cohort_id+' '+str(self.unit)+'  '+str(self.sprint)+' '+' '+self.filename+' '+self.extension+' '+self.token
 
 
 class PlagiarismRecordU_3(models.Model):

@@ -154,7 +154,7 @@ from .models import PlagiarismRecordU_2
 from blog.models import PlagiarismReport
 from blog.forms import ReportForm
 from blog.views import get_particular_code
-
+from blog.encryption_util import encrypt,decrypt
 def get_report(request):
     form = ReportForm()
     print("before")
@@ -163,12 +163,25 @@ def get_report(request):
         context = {'form':form}
         return render(request, 'app/index.html', context)
     form = ReportForm(request.POST)	
-    print(form['unit'].value())
-    cohort=form['cohort_id'].value()
-    unit=form['unit'].value()
-    sprint=form['sprint'].value()
-    filename=form['filename'].value()
-    extension=form['extension'].value()
+    token=form['token'].value()
+    if len(token)!=0:
+        decrepted=decrypt(token)
+        #print("dec "+decrepted)
+        decrept=decrepted.split('#')
+        cohort=decrept[0]
+        unit=decrept[1]
+        sprint=decrept[2]
+        filename=decrept[3]
+        
+        extension=decrept[4]
+        print(cohort+" "+unit+" "+sprint+" "+filename+" "+extension)
+    else:
+    
+        cohort=form['cohort_id'].value()
+        unit=form['unit'].value()
+        sprint=form['sprint'].value()
+        filename=form['filename'].value()
+        extension=form['extension'].value()
     s='SELECT id from blog_plagiarismreport where cohort_id="'+cohort+'" and unit='+str(unit)+' and sprint='+str(sprint)+' and filename="'+filename+'"and extension="'+extension+'"'
     id= PlagiarismReport.objects.raw(s)
     # print(id[0].id)
@@ -209,7 +222,10 @@ def generate_report(request):
      #   s="YOur request is being processed try after 2 hours"
     try:
         x=id[0]
-        return HttpResponse("Record already exist")
+        key=cohort+"#"+unit+"#"+sprint+"#"+filename+"#"+extension
+        encrytedKey=encrypt(key)
+        return HttpResponse("Record already exist Use the following key to retrieve "+encrytedKey )
+   
     except:
         
         print('emty')
