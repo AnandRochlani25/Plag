@@ -160,7 +160,7 @@ def get_report(request):
     print("before")
     if request.method == 'GET':
         form = ReportForm(request.GET)	
-        context = {'form':form}
+        context = {'form':form, 'unit': "unit-2"}
         return render(request, 'app/index.html', context)
     form = ReportForm(request.POST)	
     token=form['token'].value()

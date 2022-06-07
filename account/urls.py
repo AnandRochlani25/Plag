@@ -6,7 +6,6 @@ urlpatterns = [
  
     path('report/',generate_report,name="unit2rep"),
     path('record/',get_report,name="unit2rec"),
-    path('',home_page_unit,name='home2')
-    
-   
+    path('',home_page_unit,name='home2'),
+ 
 ]
