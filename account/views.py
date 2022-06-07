@@ -161,7 +161,7 @@ def get_report(request):
     if request.method == 'GET':
         form = ReportForm(request.GET)	
         context = {'form':form, 'unit': "unit-2"}
-        return render(request, 'app/index.html', context)
+        return render(request, 'app/form_u2.html', {'form':form, 'unit': "unit-2"})
     form = ReportForm(request.POST)	
     token=form['token'].value()
     if len(token)!=0:
@@ -206,8 +206,9 @@ def generate_report(request):
     print("before")
     if request.method == 'GET':
         form = ReportForm(request.GET)	
-        context = {'form':form}
-        return render(request, 'app/index.html', context)
+        # context = {'form':form}
+        # return render(request, 'app/form_u2.html', context)
+        return render(request, 'app/form_u2.html', {'form':form, 'unit':"unit-2"})
     form = ReportForm(request.POST)	
     print(form['unit'].value())
     cohort=form['cohort_id'].value()

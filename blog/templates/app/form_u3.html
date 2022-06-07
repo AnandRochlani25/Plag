@@ -1,5 +1,5 @@
 <head>
-    <title>Bootstrap Example</title>
+    <title>Form Unit-3</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -9,7 +9,7 @@
   <body>
       <center>
 <div class="container" style="width:1280px;font-size: 25px;">
-<h1>Report Form</h1>
+<h1>Report Form (Unit-3)</h1>
 <hr>
 
 <form action="" method="post" >
@@ -19,13 +19,13 @@
         <label for="id_cohort_id">Cohort id:</label>  <br>
     
        
-      <input type="text" name="cohort_id" maxlength="15" required id="id_cohort_id">
+      <input type="text" name="cohort_id" maxlength="15"  id="id_cohort_id" placeholder="pd_demo">
       </div>
       <div class="form-group">
            <label for="id_unit">Unit:</label> <br>
        
        
-      <input type="number" name="unit" required id="id_unit">
+      <input type="number" name="unit"  id="id_unit" placeholder="3">
       
       </div>
     
@@ -34,7 +34,7 @@
           <label for="id_sprint">Sprint:</label>     <br>
        
        
-      <input type="number" name="sprint" required id="id_sprint">  
+      <input type="number" name="sprint"  id="id_sprint" placeholder="1 or 2">  
       
       </div>
       
@@ -44,18 +44,24 @@
           <label for="id_filename">Filename:</label>      <br>
        
        
-      <input type="text" name="filename" maxlength="255" required id="id_filename">
+      <input type="text" name="filename" maxlength="255" id="id_filename" placeholder="checkout">
       </div>
 
       <div class="form-group">
           <label for="id_extension">Extension:</label>      <br>
        
      
-      <input type="text" name="extension" maxlength="10" required id="id_extension">
+      <input type="text" name="extension" maxlength="10"  id="id_extension" placeholder="js">
       
       </div>
-      
-      
+      <div class="form-group">
+        <label for="id_token">Token:</label>      <br>
+     
+   
+        <textarea name="token" maxlength="10000"  id="id_token" rows="8">
+
+        </textarea>
+      </div>
     
     
 	  <button type="submit" class="btn btn-default" style="width:200px;font-size: 35px; ">Submit</button>

@@ -366,7 +366,7 @@ def get_report(request):
     if request.method == 'GET':
         form = ReportForm(request.GET)	
         context = {'form':form}
-        return render(request, 'app/index.html', context)
+        return render(request, 'app/form_u3.html', context)
     form = ReportForm(request.POST)	
     token=form['token'].value()
     #print("token"+token)
@@ -414,7 +414,7 @@ def generate_result(request):
     
     """
     //c11,3,2,abc.html
-    //c11,4,3,index.html
+    //c11,4,3,form_u3.html
     
     Generates two csv reports : one with all repository where required files were not present
     the other which has all combination of students and the similarity between their codes : 3 fields
@@ -426,7 +426,7 @@ def generate_result(request):
     if request.method == 'GET':
         form = ReportForm(request.GET)	
         context = {'form':form}
-        return render(request, 'app/index.html', context)
+        return render(request, 'app/form_u3.html', context)
     form = ReportForm(request.POST)	
     print(form['unit'].value())
     cohort=form['cohort_id'].value()
@@ -454,21 +454,25 @@ def generate_result(request):
         id= PlagiarismReport.objects.raw(s)[0]
     #report.object.create(cohort,unit,sprint,filename,extension)
         
-        cohort_repos = get_repo_list(cohort)
+        cohort_repos = get_repo_list(cohort)  #returns list of repositories wit hcohort as substring
+
     # cohort_repos = ['ankit_fw10_011', 'sonam_nj2_113', 'bicky_fw10_069', 'neeraj_fw10_110', 'akhil_fw10_030', 'krishna_fw10_133', 'deevanshu_fw10_194']
+        #filtered_repo receives a dictinary -> all_missing and all_present repos.
         filtered_repo = filter_repos(cohort_repos, unit, sprint, filename, extension)
         print(filtered_repo)
         present_repos = filtered_repo['present_repos']
         #present_repos = ['pd_demo_3','pd_demo_2','pd_demo_1']
         missing_repos = filtered_repo['missing_repos']
-    # # pprint(missing_repos)
+    
         fieldnames_missing = ['student_code']
         fieldnames_similarity = ['student_1', 'student_2', 'similarity_percentage']
+
         with open('missed_files_1.csv', 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames = fieldnames_missing)
             writer.writeheader()
             for repo in missing_repos:
                 writer.writerow({'student_code': repo})
+
         with open('similarity_files_2.csv', 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames = fieldnames_similarity)
             writer.writeheader()
@@ -491,7 +495,7 @@ def generate_result(request):
                     record.save()
                     print("s")
                     writer.writerow({'student_1': student_1, 'student_2': student_2, 'similarity_percentage': similarity_coeff})
-                    pprint(student_1 + ' | ' + student_2 + ' -> ' + str(similarity_coeff))
+                    #pprint(student_1 + ' | ' + student_2 + ' -> ' + str(similarity_coeff))
                     key=cohort+"#"+unit+"#"+sprint+"#"+filename+"#"+extension
                     encrytedKey=encrypt(key)
         return HttpResponse("Report submitted successfully,Use this key to retreive"+encrytedKey)
